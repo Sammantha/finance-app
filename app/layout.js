@@ -2,6 +2,7 @@
 
 import Head from 'next/head';
 import Menu from './components/menu/menu';
+import './global.css'
 
 export default function RootLayout({ children }) {
   return (

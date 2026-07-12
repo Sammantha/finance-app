@@ -1,7 +1,11 @@
+import Link from 'next/link';
+import styles from './Menu.module.css';
+
 export default function Menu() {
   return (
-    <div>
-        <p>This is the menu for navigation</p>
+    <div className={styles.container}>
+      <Link href="/">Home</Link>
+      <Link href="/expenses">Expenses</Link>
     </div>
   );
 }
