@@ -6,7 +6,7 @@ export async function GET(request) {
     { id: 2, name: 'Home Chef', accountId: 0, frequencyId: 0, janAmt: 150.65 },
   ];
 
-  return new Response(JSON.stringify(users), {
+  return new Response(JSON.stringify(expenses), {
     status: 200,
     headers: { 'Content-Type': 'application/json' }
   });
