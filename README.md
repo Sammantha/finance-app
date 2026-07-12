@@ -1,5 +1,19 @@
-# NextJS website template
+# Finance App
 
-This is a template for a fullstack NextJS website.
-The example project on their site does not meet my needs.
-So here's the most bare-bones thing all my projects need set up.
+Fullstack NextJS application that tracks expenses, balances, and projects balances based on current month's expenses
+
+## Stack
+
+NextJS
+
+## How to Use
+
+1. Install Dependencies
+```bash
+npm i
+```
+
+2. Serve locally
+```bash
+npm run dev
+```

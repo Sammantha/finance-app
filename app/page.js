@@ -1,12 +1,10 @@
-import Head from 'next/head';
 import styles from './Home.module.css';
-import Menu from './components/menu/menu';
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <h1>This is a NextJS Template</h1>
-      <p>Because the template on their website doesn't meet my needs</p>
+      <h1>Finance App</h1>
+      <p>This is the homepage/dashbord that I haven't designed yet</p>
     </div>
   );
 }
