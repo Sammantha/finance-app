@@ -1,10 +1,15 @@
 'use client';
 
 import useSWR from 'swr';
+import ExpenseItem from '../components/expenseItem/expenseItem';
 
 export default function Expenses() {
   const fetcher = (...args) => fetch(...args).then(res => res.json());
-  const { data, error, isLoading } = useSWR('/api/expenses', fetcher);
+  let { data, error, isLoading } = useSWR('/api/frequency', fetcher);
+  const frequencyMap = data;
+  ({ data, error, isLoading } = useSWR('/api/accounts', fetcher));
+  const accountsMap = data;
+  ({ data, error, isLoading } = useSWR('/api/expenses', fetcher));
 
   if (error) return <div>Failed to load</div>
   if (isLoading) return <div>Loading...</div>
@@ -12,11 +17,11 @@ export default function Expenses() {
   return (
     <div>
       <h1>Expenses</h1>
-      <p>This is the expenses page where all Expenses, their amounts, and their frequency will be noted and editable.</p>
+      <h3>Add, Remove, and Edit expenses.</h3>
     
-      { data && data.map((expense) => {
+      { data && frequencyMap && accountsMap && data.map((expense) => {
         return (
-          <p>{expense?.name}</p>
+          <ExpenseItem key={expense.id} expense={expense} frequencies={frequencyMap} accounts={accountsMap}></ExpenseItem>
         )
       })}
     </div>

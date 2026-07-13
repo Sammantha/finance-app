@@ -2,14 +2,19 @@ html {
   background-color: #0B0D10;
   color: #E6E9EE;
   min-height: 100vh;
+  font-size: 1.1rem;
 }
 
 h1 {
     font-size: 3rem;
 }
 
+h3 {
+    font-size: 1.5rem;
+}
+
 p, a {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 a {
