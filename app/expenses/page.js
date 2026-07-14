@@ -17,8 +17,9 @@ export default function Expenses() {
   return (
     <div>
       <h1>Expenses</h1>
-      <h3>Add, Remove, and Edit expenses.</h3>
-    
+      <div>
+        <button>New Expense</button>
+      </div>
       { data && frequencyMap && accountsMap && data.map((expense) => {
         return (
           <ExpenseItem key={expense.id} expense={expense} frequencies={frequencyMap} accounts={accountsMap}></ExpenseItem>

@@ -12,12 +12,22 @@
     border: none;
 }
 
+.container select {
+    min-width: 100%;
+}
+
 .cell2 {
     flex: 2;
+    margin-right: 10px;
 }
 
 .cell1 {
     flex: 2;
+    margin-right: 10px;
+}
+
+button.edit {
+    background-color: orange;
 }
 
 button.save {
