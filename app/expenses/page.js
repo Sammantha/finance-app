@@ -2,6 +2,7 @@
 
 import useSWR from 'swr';
 import ExpenseItem from '../components/expenseItem/expenseItem';
+import styles from './Expenses.module.css';
 
 export default function Expenses() {
   const fetcher = (...args) => fetch(...args).then(res => res.json());
@@ -15,10 +16,10 @@ export default function Expenses() {
   if (isLoading) return <div>Loading...</div>
 
   return (
-    <div>
-      <h1>Expenses</h1>
-      <div>
-        <button>New Expense</button>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>Expenses</h1>
+        <button className={styles.new}>New Expense</button>
       </div>
       { data && frequencyMap && accountsMap && data.map((expense) => {
         return (
