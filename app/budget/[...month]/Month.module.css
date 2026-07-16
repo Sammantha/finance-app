@@ -18,8 +18,8 @@
 }
 
 .accountName {
-  align-self: center;
   font-weight: bold;
+  text-align: center;
 }
 
 .accountBalance {

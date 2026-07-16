@@ -17,9 +17,11 @@ export default function BudgetMonth(props) {
   let { data, error, isLoading } = useSWR('/api/accounts', fetcher);
   const accounts = data;
   // ({ data, error, isLoading } = useSWR(`/api/expenses/${year}/${month}`, fetcher));
+  // const expenses = data;
 
   {/* State declarations */}
   const [accountBalances, setAccountBalances] = useState(accounts);
+  const [expenses, setExpenses] = useState(null);
 
   {/* State change functions */}
 
@@ -45,6 +47,13 @@ export default function BudgetMonth(props) {
           );
           })}
         </div>
+
+        {/* Expenses */}
+        {/* If no historical/paid expenses exist, we need to create them, so provide a button */}
+        {!expenses && <div>
+          <h2>No expenses found for this month. Create them?</h2>
+          <button>Yes, do it now.</button>
+        </div>}
     </div>
   );
 }
