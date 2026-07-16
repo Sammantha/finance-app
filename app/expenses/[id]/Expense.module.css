@@ -25,7 +25,7 @@
 
 .monthlyAmts {
   display: flex;
-  padding: 0 5rem;
+  padding: 0 25%;
   flex-direction: column;
 }
 

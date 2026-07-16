@@ -6,6 +6,7 @@ export default function Menu() {
     <div className={styles.container}>
       <Link href="/">Home</Link>
       <Link href="/expenses">Expenses</Link>
+      <Link href="/budget">Budget</Link>
     </div>
   );
 }

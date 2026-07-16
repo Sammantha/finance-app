@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import ExpenseItem from '../components/expenseItem/expenseItem';
+import ExpenseItem from '../_components/expenseItem/expenseItem';
 import styles from './Expenses.module.css';
 
 export default function Expenses() {

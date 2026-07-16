@@ -1,0 +1,27 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.accountSection {
+  background-color: #1A1F26;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.account {
+  padding: 10px;
+}
+
+.accountName {
+  align-self: center;
+  font-weight: bold;
+}
+
+.accountBalance {
+  text-align: center;
+}

@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import { useState } from 'react';
 import styles from './Expense.module.css';
 
-const dayOfWeekMap = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+const dayOfWeekMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export default function Menu(props) {
   const { id } = props;
@@ -41,6 +41,10 @@ export default function Menu(props) {
   const onJanAmountChange = (event) => {
     setJanAmount(event.target.value);
   };
+
+  const onSave = (event) => {
+    console.log('saving', expenseName);
+  }
 
   {/* Loading or Error */}
   if (error) return <div>Failed to load</div>
@@ -85,8 +89,8 @@ export default function Menu(props) {
             <>
               <label>Day of Week </label>
               <select value={frequencyId} onChange={onFrequencyChange}> 
-                {dayOfWeekMap.map(({dowId, name}) => {
-                    return <option key={`${id}_dow_${dowId}`} value={dowId}>{name}</option>
+                {dayOfWeekMap.map((name, index) => {
+                    return <option key={`${id}_dow_${index}`} value={index}>{name}</option>
                 })}
               </select>
             </>
@@ -109,7 +113,7 @@ export default function Menu(props) {
 
         {/* Buttons */}
         <div className={styles.buttons}>
-          <button className={styles.save}>Save</button>
+          <button className={styles.save} onClick={onSave}>Save</button>
           <button className={styles.delete}>Delete</button>
         </div>
     </div>
