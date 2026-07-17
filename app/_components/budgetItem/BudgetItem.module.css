@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    background-color: #1A1F26;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.container button {
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: none;
+}
+
+.cell2 {
+    flex: 2;
+    margin-right: 10px;
+}
+
+.cell1 {
+    flex: 1;
+    margin-right: 10px;
+}
+
+button.edit {
+    background-color: orange;
+}
+
+button.done {
+    background-color: rgb(28, 110, 28);
+    margin-right: 5px;
+}
+
+button.delete {
+    background-color: rgb(139, 11, 11);
+}

@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { useParams } from 'next/navigation';
 import styles from './Month.module.css';
 import { useState } from 'react';
+import BudgetItem from '../../_components/budgetItem/budgetItem';
 
 const monthsOfYearMap = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -16,12 +17,12 @@ export default function BudgetMonth(props) {
   const fetcher = (...args) => fetch(...args).then(res => res.json());
   let { data, error, isLoading } = useSWR('/api/accounts', fetcher);
   const accounts = data;
-  // ({ data, error, isLoading } = useSWR(`/api/expenses/${year}/${month}`, fetcher));
-  // const expenses = data;
+  ({ data, error, isLoading } = useSWR(`/api/scheduledTransactions`, fetcher));
+  const expenses = data;
 
   {/* State declarations */}
   const [accountBalances, setAccountBalances] = useState(accounts);
-  const [expenses, setExpenses] = useState(null);
+  const [historicalExpenses, setHistoricalExpenses] = useState(null);
 
   {/* State change functions */}
 
@@ -33,7 +34,6 @@ export default function BudgetMonth(props) {
   return (
     <div className={styles.container}>
         <h1 className='center'>{monthsOfYearMap[month - 1]} {year}</h1>
-        <p>Eventually, this page fetches the expenses that are tagged for the corresponding year & month</p>
 
         {/* Account Balances */}
         <h2>Account Balances</h2>
@@ -53,6 +53,20 @@ export default function BudgetMonth(props) {
         {!expenses && <div>
           <h2>No expenses found for this month. Create them?</h2>
           <button>Yes, do it now.</button>
+        </div>}
+
+        {expenses && <div>
+          {/* Table Headers */}
+          <div className={styles.headers}>
+            <div className={styles.cell2}>Expense Name</div>
+            <div className={styles.cell2}>Transaction Date</div>
+            <div className={styles.cell2}>Account</div>
+            <div className={styles.cell2}>$ Amount</div>
+            <div className={styles.cell1}>Paid?</div>
+          </div>
+          { expenses.map((expense) => {
+              return <BudgetItem key={`budgetItem_${expense.id}`} accounts={accounts} expense={expense}></BudgetItem>
+          })}
         </div>}
     </div>
   );

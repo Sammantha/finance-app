@@ -6,12 +6,12 @@ import styles from './Expense.module.css';
 
 const dayOfWeekMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-export default function Menu(props) {
+export default function ExpenseDetail(props) {
   const { id } = props;
 
   {/* API fetching */}
   const fetcher = (...args) => fetch(...args).then(res => res.json());
-  let { data, error, isLoading } = useSWR('/api/frequency', fetcher);
+  let { data, error, isLoading } = useSWR('/api/frequencies', fetcher);
   const frequencies = data;
   ({ data, error, isLoading } = useSWR('/api/accounts', fetcher));
   const accounts = data;
@@ -73,8 +73,8 @@ export default function Menu(props) {
         </div>
 
         {/* Transaction Days */}
-        <h2 className='center'>Transaction Days</h2>
         <div className={styles.section}>
+          <h2 className='center'>Transaction Days</h2>
           {/* Frequency */}
           <label>Frequency </label>
           <select value={frequencyId} onChange={onFrequencyChange}>
@@ -98,16 +98,18 @@ export default function Menu(props) {
         </div>
 
         {/* Monthly base amounts */}
-        <h2 className='center'>Monthly Amounts</h2>
         <div className={styles.monthlyAmts}>
-          <div className={styles.singleMonthAmt}>
-            <label>January</label>
-            <input value={janAmount} onChange={onJanAmountChange}/>
-          </div>
+          <div className={styles.monthlyAmtsBackground}>
+            <h2 className='center'>Monthly Amounts</h2>
+            <div className={styles.singleMonthAmt}>
+              <label>January</label>
+              <input value={janAmount} onChange={onJanAmountChange}/>
+            </div>
 
-          <div className={styles.singleMonthAmt}>
-            <label>February</label>
-            <input/>
+            <div className={styles.singleMonthAmt}>
+              <label>February</label>
+              <input/>
+            </div>
           </div>
         </div>
 

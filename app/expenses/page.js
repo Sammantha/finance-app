@@ -6,7 +6,7 @@ import styles from './Expenses.module.css';
 
 export default function Expenses() {
   const fetcher = (...args) => fetch(...args).then(res => res.json());
-  let { data, error, isLoading } = useSWR('/api/frequency', fetcher);
+  let { data, error, isLoading } = useSWR('/api/frequencies', fetcher);
   const frequencyMap = data;
   ({ data, error, isLoading } = useSWR('/api/accounts', fetcher));
   const accountsMap = data;

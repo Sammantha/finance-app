@@ -20,13 +20,24 @@
 }
 
 .section {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.section h2, .monthlyAmts h2 {
+  margin-top: 0;
 }
 
 .monthlyAmts {
   display: flex;
   padding: 0 25%;
   flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.monthlyAmtsBackground {
+  background-color: #1A1F26;
+  border-radius: 5px;
+  padding: 1rem;
 }
 
 .singleMonthAmt {
