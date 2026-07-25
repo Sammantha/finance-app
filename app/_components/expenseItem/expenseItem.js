@@ -3,7 +3,7 @@
 import styles from './ExpenseItem.module.css';
 import Link from 'next/link';
 
-export default function Menu(props) {
+export default function ExpenseItem(props) {
   return (
     <div className={styles.container}>
         <div className={styles.cell2}>{props.expense.name}</div>

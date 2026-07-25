@@ -1,5 +1,3 @@
-'use client'
-
 import Head from 'next/head';
 import Menu from './_components/menu/menu';
 import './global.css'

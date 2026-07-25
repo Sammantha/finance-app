@@ -6,7 +6,10 @@ export async function GET(request) {
     { id: 2, name: 'Home Chef', accountId: 0, frequencyId: 0, janAmt: 150.65 },
   ];
 
-  return new Response(JSON.stringify(expenses), {
+  const response = await fetch('https://finance-api.sammantha-sadler.workers.dev/api/expenses')
+    .then((res) => res.json());
+
+  return new Response(JSON.stringify(response), {
     status: 200,
     headers: { 'Content-Type': 'application/json' }
   });
