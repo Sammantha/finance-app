@@ -46,6 +46,10 @@
   margin-bottom: 10px;
 }
 
+.singleMonthAmt input {
+  text-align: right;
+}
+
 .save {
   background-color: green;
 }

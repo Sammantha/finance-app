@@ -54,8 +54,10 @@ export default function ExpenseDetail() {
   };
 
   const onAmountChange = (event) => {
+    // TODO: validate input (too large, too small, number of decimal places, strings)
     let obj = {};
-    obj[event.target.name] = event.target.value;
+    // multiply by 100 to return the amount to PENNIES state
+    obj[event.target.name] = event.target.value * 100;
 
     setAmounts({...amounts, ...obj});
   };
@@ -120,11 +122,13 @@ export default function ExpenseDetail() {
           <div className={styles.monthlyAmtsBackground}>
             <h2 className='center'>Monthly Amounts</h2>
 
-            { amounts && monthsOfTheYear.map((monthName, index) => {
+            { monthsOfTheYear.map((monthName, index) => {
               return(
                 <div key={`${monthName}Amt`} className={styles.singleMonthAmt}>
                   <label>{monthName}</label>
-                  <input name={monthName} value={amounts[monthName]} onChange={onAmountChange}/>
+                  {/* TODO: to display trailing .00s we will need to use a non-vanilla <input/> OR custom component */}
+                  {/* Divide by 100 to transform PENNIES amount into DOLLARS amount */}
+                  <input name={monthName} value={(amounts?.[monthName] ?? 0)/100} onChange={onAmountChange} type='number'/>
                 </div>
               );
             })}
