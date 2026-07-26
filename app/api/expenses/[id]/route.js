@@ -2,13 +2,11 @@ import { NextRequest } from 'next/server';
  
 export async function GET(request, { params }) {
   const id = (await params).id;
-  // e.g. Query a database for user with ID `id`
+  const response = await fetch(`https://finance-api.sammantha-sadler.workers.dev/api/expenses/${id}`)
+    .then((res) => res.json());
 
-  // fake it for now
-  const expense = { id: 2, name: 'Home Chef', accountId: 0, frequencyId: 0, janAmt: 150.65 }
-
-  return new Response(JSON.stringify(expense), {
+  return new Response(JSON.stringify(response), {
     status: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' }
   });
 }

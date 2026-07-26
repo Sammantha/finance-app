@@ -3,11 +3,13 @@
 import useSWR from 'swr';
 import { useState } from 'react';
 import styles from './Expense.module.css';
+import { useParams } from 'next/navigation'
 
 const dayOfWeekMap = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const monthsOfTheYear = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-export default function ExpenseDetail(props) {
-  const { id } = props;
+export default function ExpenseDetail() {
+  const params = useParams();
 
   {/* API fetching */}
   const fetcher = (...args) => fetch(...args).then(res => res.json());
@@ -15,13 +17,26 @@ export default function ExpenseDetail(props) {
   const frequencies = data;
   ({ data, error, isLoading } = useSWR('/api/accounts', fetcher));
   const accounts = data;
-  ({ data, error, isLoading } = useSWR(`/api/expenses/${id}`, fetcher));
+  ({ data, error, isLoading } = useSWR(`/api/expenses/${params.id}`, fetcher));
 
   {/* State declarations */}
-  const [ expenseName, setExpenseName ] = useState(data?.name);
-  const [ frequencyId, setFrequencyId ] = useState(data?.frequencyId == null ? '' : +data.frequencyId);
-  const [ accountId, setAccountId ] = useState(data?.accountId == null ? '' : +data.accountId);
-  const [ janAmount, setJanAmount ] = useState(data?.janAmt);
+  const [ expenseName, setExpenseName ] = useState(data?.expense?.name);
+  const [ frequencyId, setFrequencyId ] = useState(data?.expense?.frequencyId == null ? '' : +data?.expense?.frequencyId);
+  const [ accountId, setAccountId ] = useState(data?.expense?.accountId == null ? '' : +data?.expense?.accountId);
+  const [ amounts, setAmounts ] = useState({
+    January: data?.expense?.janAmt, 
+    February: data?.expense?.febAmt, 
+    March: data?.expense?.marAmt, 
+    April: data?.expense?.aprAmt,
+    May: data?.expense?.mayAmt,
+    June: data?.expense?.junAmt,
+    July: data?.expense?.julAmt,
+    August: data?.expense?.augAmt,
+    September: data?.expense?.sepAmt,
+    October: data?.expense?.octAmt,
+    November: data?.expense?.novAmt,
+    December: data?.expense?.decAmt
+  });
 
   {/* State change functions */}
   const onAccountChange = (event) => {
@@ -38,8 +53,11 @@ export default function ExpenseDetail(props) {
     setExpenseName(event.target.value);
   };
 
-  const onJanAmountChange = (event) => {
-    setJanAmount(event.target.value);
+  const onAmountChange = (event) => {
+    let obj = {};
+    obj[event.target.name] = event.target.value;
+
+    setAmounts({...amounts, ...obj});
   };
 
   const onSave = (event) => {
@@ -67,7 +85,7 @@ export default function ExpenseDetail(props) {
             <select value={accountId} onChange={onAccountChange}>
               <option value=''>--Select an Account--</option>
               {accounts.map(acct => {
-                  return <option key={`${id}_acct_${acct.id}`} value={acct.id}>{acct.name}</option>
+                  return <option key={`${params.id}_acct_${acct.id}`} value={acct.id}>{acct.name}</option>
               })}
             </select>
         </div>
@@ -80,7 +98,7 @@ export default function ExpenseDetail(props) {
           <select value={frequencyId} onChange={onFrequencyChange}>
             <option value=''>--Select a Frequency--</option>
             {frequencies.map(freq => {
-                return <option key={`${id}_freq_${freq.id}`} value={freq.id}>{freq.name}</option>
+                return <option key={`${params.id}_freq_${freq.id}`} value={freq.id}>{freq.name}</option>
             })}
           </select>
 
@@ -90,7 +108,7 @@ export default function ExpenseDetail(props) {
               <label>Day of Week </label>
               <select value={frequencyId} onChange={onFrequencyChange}> 
                 {dayOfWeekMap.map((name, index) => {
-                    return <option key={`${id}_dow_${index}`} value={index}>{name}</option>
+                    return <option key={`${params.id}_dow_${index}`} value={index}>{name}</option>
                 })}
               </select>
             </>
@@ -101,15 +119,16 @@ export default function ExpenseDetail(props) {
         <div className={styles.monthlyAmts}>
           <div className={styles.monthlyAmtsBackground}>
             <h2 className='center'>Monthly Amounts</h2>
-            <div className={styles.singleMonthAmt}>
-              <label>January</label>
-              <input value={janAmount} onChange={onJanAmountChange}/>
-            </div>
 
-            <div className={styles.singleMonthAmt}>
-              <label>February</label>
-              <input/>
-            </div>
+            { amounts && monthsOfTheYear.map((monthName, index) => {
+              return(
+                <div key={`${monthName}Amt`} className={styles.singleMonthAmt}>
+                  <label>{monthName}</label>
+                  <input name={monthName} value={amounts[monthName]} onChange={onAmountChange}/>
+                </div>
+              );
+            })}
+
           </div>
         </div>
 

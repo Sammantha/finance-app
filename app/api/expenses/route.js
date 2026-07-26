@@ -1,11 +1,4 @@
 export async function GET(request) {
-  // fetch data from your DB here
-  const expenses = [
-    { id: 0, name: 'Rental Insurance', accountId: 0, frequencyId: 1, janAmt: 34.43 },
-    { id: 1, name: 'Rent', accountId: 0, frequencyId: 2, janAmt: 1200.00 },
-    { id: 2, name: 'Home Chef', accountId: 0, frequencyId: 0, janAmt: 150.65 },
-  ];
-
   const response = await fetch('https://finance-api.sammantha-sadler.workers.dev/api/expenses')
     .then((res) => res.json());
 
