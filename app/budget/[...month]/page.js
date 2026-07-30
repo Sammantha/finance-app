@@ -5,8 +5,7 @@ import { useParams } from 'next/navigation';
 import styles from './Month.module.css';
 import { useState } from 'react';
 import BudgetItem from '../../_components/budgetItem/budgetItem';
-
-const monthsOfYearMap = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+import { monthsOfYearMap } from '../../_helpers/time'
 
 export default function BudgetMonth(props) {
   const params = useParams();
