@@ -9,7 +9,7 @@ export default function Expenses() {
   let { data, error, isLoading } = useSWR('/api/frequencies', fetcher);
   const frequencyMap = data;
   ({ data, error, isLoading } = useSWR('/api/accounts', fetcher));
-  const accountsMap = data;
+  const accountsMap = data?.accounts;
   ({ data, error, isLoading } = useSWR('/api/expenses', fetcher));
 
   if (error) return <div>Failed to load</div>

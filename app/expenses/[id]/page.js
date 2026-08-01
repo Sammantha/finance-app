@@ -16,7 +16,7 @@ export default function ExpenseDetail() {
   let { data, error, isLoading } = useSWR('/api/frequencies', fetcher);
   const frequencies = data;
   ({ data, error, isLoading } = useSWR('/api/accounts', fetcher));
-  const accounts = data;
+  const accounts = data?.accounts;
   ({ data, error, isLoading } = useSWR(`/api/expenses/${params.id}`, fetcher));
 
   {/* State declarations */}
@@ -86,7 +86,7 @@ export default function ExpenseDetail() {
             <label>Account </label>
             <select value={accountId} onChange={onAccountChange}>
               <option value=''>--Select an Account--</option>
-              {accounts.map(acct => {
+              {accounts && accounts.map(acct => {
                   return <option key={`${params.id}_acct_${acct.id}`} value={acct.id}>{acct.name}</option>
               })}
             </select>
