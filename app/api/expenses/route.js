@@ -2,7 +2,7 @@ export async function GET(request) {
   const response = await fetch('https://finance-api.sammantha-sadler.workers.dev/api/expenses')
     .then((res) => res.json());
 
-  return new Response(JSON.stringify(response), {
+  return new Response(JSON.stringify(response.expenses), {
     status: 200,
     headers: { 'Content-Type': 'application/json' }
   });

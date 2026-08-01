@@ -16,7 +16,7 @@ export default function ExpenseDetail() {
   let { data, error, isLoading } = useSWR('/api/frequencies', fetcher);
   const frequencies = data;
   ({ data, error, isLoading } = useSWR('/api/accounts', fetcher));
-  const accounts = data?.accounts;
+  const accounts = data;
   ({ data, error, isLoading } = useSWR(`/api/expenses/${params.id}`, fetcher));
 
   {/* State declarations */}

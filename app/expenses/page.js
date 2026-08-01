@@ -9,7 +9,7 @@ export default function Expenses() {
   let { data, error, isLoading } = useSWR('/api/frequencies', fetcher);
   const frequencyMap = data;
   ({ data, error, isLoading } = useSWR('/api/accounts', fetcher));
-  const accountsMap = data?.accounts;
+  const accountsMap = data;
   ({ data, error, isLoading } = useSWR('/api/expenses', fetcher));
 
   if (error) return <div>Failed to load</div>
@@ -21,7 +21,7 @@ export default function Expenses() {
         <h1>Expenses</h1>
         <button className={styles.new}>New Expense</button>
       </div>
-      { data?.expenses && frequencyMap && accountsMap && data?.expenses?.map((expense) => {
+      { data && frequencyMap && accountsMap && data?.map((expense) => {
         return (
           <ExpenseItem key={expense.id} expense={expense} frequencies={frequencyMap} accounts={accountsMap}></ExpenseItem>
         )

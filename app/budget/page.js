@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from './Budget.module.css';
-import { monthsOfYearMap } from '../_helpers/time'
+import { monthsOfYearMap } from '../_helpers/time';
 
 export default function Budget() {
   // For now, instead of keeping this in a DB, let's keep a rolling view of last month, this month, and 3 months ahead

@@ -1,13 +1,8 @@
 export async function GET(request) {
-  // fetch data from your DB here
-  const frequencies = [
-    { id: 0, name: 'Weekly' },
-    { id: 1, name: 'BiMonthly' },
-    { id: 2, name: 'Monthly' },
-    { id: 3, name: 'Annual' }
-  ];
+  const response = await fetch('https://finance-api.sammantha-sadler.workers.dev/api/frequencies')
+    .then((res) => res.json());
 
-  return new Response(JSON.stringify(frequencies), {
+  return new Response(JSON.stringify(response.frequencies), {
     status: 200,
     headers: { 'Content-Type': 'application/json' }
   });
